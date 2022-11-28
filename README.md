@@ -6,7 +6,7 @@ The TransferBlobs feature copies blobs from one container to another in the same
 
 Here are instructions to build and run this application:
 
-NOTE: The application creates a tree structure for the destination files using the file names.  If you would like to edit this functionality, see [here](https://github.com/andrewmkhoury/azure-blob-utils/blob/a1f862127535a69f73941fe3cd3ce043d09ec385/src/main/java/com/adobe/aem/assets/azure/blobutils/AzureBlobCopier.java#L153).  This is to address situations where you need the files to be broken up into a logical folder structure by using parts of the file name.
+**NOTE:** The application creates a tree structure for the destination files using the file names.  If you would like to edit this functionality, see [here](https://github.com/andrewmkhoury/azure-blob-utils/blob/a1f862127535a69f73941fe3cd3ce043d09ec385/src/main/java/com/adobe/aem/assets/azure/blobutils/AzureBlobCopier.java#L153).  This is to address situations where you need the files to be broken up into a logical folder structure by using parts of the file name.
 
 1. Build the jar file using maven:
    ```
@@ -20,7 +20,7 @@ NOTE: The application creates a tree structure for the destination files using t
    storage-shared-key=
    source-container-name=test-source-blob-container
    destination-container-name=test-destination-blob-container
-   max-files-to-copy=200
+   max-files-to-copy=20
    ```
    Instructions to retrieve the `storage-shared-key` can be found [here](https://learn.microsoft.com/en-us/azure/storage/common/storage-account-keys-manage?tabs=azure-portal)
    The `max-files-to-copy` is set to 200 for testing purposes, so you can first test the copy. Once you are ready to run the process completely then increase the value.
