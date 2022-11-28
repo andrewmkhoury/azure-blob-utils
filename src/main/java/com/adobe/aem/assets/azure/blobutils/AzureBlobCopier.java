@@ -90,8 +90,8 @@ public class AzureBlobCopier {
 
 			String srcBlobSas = srcBlobClient.generateSas(getBlobSasSignatureValues(blob.getName()));
 			String srcBlobURL = srcBlobClient.getBlobUrl() + "?" + srcBlobSas;
-			System.out.println(String.format("Queued for copy: %s", srcBlobClient.getBlobUrl()));
-			queuePolling(dstBlobClient.beginCopy(new BlobBeginCopyOptions(srcBlobURL)));
+			System.out.println(String.format("Queued for copy: %s", blob.getName()));
+			queuePolling(dstBlobClient.beginCopy(new BlobBeginCopyOptions(srcBlobURL)), blob.getName(), dstContainer.getBlobContainerName(), newName);
 			counter++;
 			if (counter == maxBlobsToCopy) {
 				break;
@@ -120,13 +120,13 @@ public class AzureBlobCopier {
 		return blobServiceClient.getBlobContainerClient(containerName);
 	}
 
-	private void queuePolling(SyncPoller<BlobCopyInfo, Void> poller) {
+	private void queuePolling(SyncPoller<BlobCopyInfo, Void> poller, String srcName, String destContainerName, String destName) {
 		executorService.submit(new Runnable() {
 			@Override
 			public void run() {
 				PollResponse<BlobCopyInfo> response = poller.waitForCompletion();
 				if (LongRunningOperationStatus.SUCCESSFULLY_COMPLETED == response.getStatus()) {
-					System.out.println(String.format("Copied %s", response.getValue().getCopySourceUrl()));
+					System.out.println(String.format("Copied %s to %s/%s", response.getValue().getCopySourceUrl().replaceAll("https:\\/\\/[^/]+\\/|\\?.*", ""), destContainerName, destName));
 				} else {
 					System.out.println(String.format("ERROR: failed to copy %s", response.getValue()));
 				}
