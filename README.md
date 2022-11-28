@@ -6,6 +6,8 @@ The TransferBlobs feature copies blobs from one container to another in the same
 
 Here are instructions to build and run this application:
 
+NOTE: The application creates a tree structure for the destination files using the file names.  If you would like to edit this functionality, see [here](https://github.com/andrewmkhoury/azure-blob-utils/blob/a1f862127535a69f73941fe3cd3ce043d09ec385/src/main/java/com/adobe/aem/assets/azure/blobutils/AzureBlobCopier.java#L153).  This is to address situations where you need the files to be broken up into a logical folder structure by using parts of the file name.
+
 1. Build the jar file using maven:
    ```
    mvn install
