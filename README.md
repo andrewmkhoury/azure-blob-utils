@@ -20,7 +20,7 @@ Here are instructions to build and run this application:
    destination-container-name=test-destination-blob-container
    max-files-to-copy=200
    ```
-   The `storage-shared-key`
+   Instructions to retrieve the `storage-shared-key` can be found [here](https://learn.microsoft.com/en-us/azure/storage/common/storage-account-keys-manage?tabs=azure-portal)
    The `max-files-to-copy` is set to 200 for testing purposes, so you can first test the copy. Once you are ready to run the process completely then increase the value.
 3. Run the jar (the working directory where you run it from must have the `azure-blob-utils.properties` file):
    ```
