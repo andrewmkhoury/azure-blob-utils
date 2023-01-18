@@ -150,6 +150,10 @@ public class AzureBlobCopier {
 		}
 	}
 
+	/**
+	 * This method generates the new destination name for the file.
+	 * Customize this method to meet the needs of your application.
+	 */
 	private String generateDestinationName(String name) {
 		String newName = name.replaceAll("-", "");
 		if (name.length() > 12) {
